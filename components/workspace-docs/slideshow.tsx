@@ -12,17 +12,18 @@ import { Slide03 } from "./slides/slide-03";
 import { Slide04 } from "./slides/slide-04";
 import { Slide05 } from "./slides/slide-05";
 import { Slide06 } from "./slides/slide-06";
-import { 
-  Slide07, Slide08, Slide09, Slide10, Slide11, Slide12, 
-  Slide13, Slide14, Slide15, Slide16, Slide17, Slide18, 
-  Slide19, Slide20, SlideCredits 
-} from "./slides/remaining-slides";
-
-const SLIDE_COMPONENTS = [
-  Slide01, Slide02, Slide03, Slide04, Slide05, Slide06,
+import {
   Slide07, Slide08, Slide09, Slide10, Slide11, Slide12,
   Slide13, Slide14, Slide15, Slide16, Slide17, Slide18,
   Slide19, Slide20, SlideCredits
+} from "./slides/remaining-slides";
+
+const SLIDE_COMPONENTS = [
+  SlideCredits,
+  Slide01, Slide02, Slide03, Slide04, Slide05, Slide06,
+  Slide07, Slide08, Slide09, Slide10, Slide11, Slide12,
+  Slide13, Slide14, Slide15, Slide16, Slide17, Slide18,
+  Slide19, Slide20
 ];
 
 export function Slideshow() {
@@ -63,8 +64,8 @@ export function Slideshow() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [nextSlide, prevSlide]);
 
-  const currentSlideData = currentSlide < SLIDES.length ? SLIDES[currentSlide] : null;
-  const isCreditsSlide = currentSlide === totalSlides - 1;
+  const currentSlideData = currentSlide > 0 && currentSlide <= SLIDES.length ? SLIDES[currentSlide - 1] : null;
+  const isCreditsSlide = currentSlide === 0;
   const SlideComponent = SLIDE_COMPONENTS[currentSlide];
   const progress = ((currentSlide + 1) / totalSlides) * 100;
 
@@ -72,7 +73,7 @@ export function Slideshow() {
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
       {/* Progress Bar */}
       <div className="fixed top-0 left-0 right-0 h-1 bg-slate-800 z-50">
-        <div 
+        <div
           className="h-full bg-gradient-to-r from-indigo-500 to-blue-500 transition-all duration-300 ease-out"
           style={{ width: `${progress}%` }}
         />
@@ -80,7 +81,7 @@ export function Slideshow() {
 
       {/* Header */}
       <header className="fixed top-1 left-0 right-0 h-14 bg-slate-900/90 backdrop-blur-md border-b border-white/10 flex items-center px-4 md:px-6 gap-4 z-40">
-        <button 
+        <button
           onClick={() => setIsNavOpen(!isNavOpen)}
           className="p-2 rounded-lg hover:bg-slate-800 transition-colors"
         >
@@ -108,19 +109,19 @@ export function Slideshow() {
               <X className="w-4 h-4 text-slate-400" />
             </button>
           </div>
-          
+
           {SLIDES.map((slide, index) => {
             const blockColor = BLOCK_COLORS[slide.block];
             const isActive = currentSlide === index;
-            
+
             return (
               <button
                 key={slide.id}
                 onClick={() => goToSlide(index)}
                 className={cn(
                   "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all duration-200 mb-1",
-                  isActive 
-                    ? "bg-indigo-500/20 border-l-2 border-indigo-500" 
+                  isActive
+                    ? "bg-indigo-500/20 border-l-2 border-indigo-500"
                     : "hover:bg-slate-800/50 border-l-2 border-transparent"
                 )}
               >
@@ -147,26 +148,26 @@ export function Slideshow() {
               </button>
             );
           })}
-          
+
           {/* Credits link */}
           <button
-            onClick={() => goToSlide(totalSlides - 1)}
+            onClick={() => goToSlide(0)}
             className={cn(
               "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all duration-200 mt-4 border-t border-white/10 pt-4",
-              currentSlide === totalSlides - 1
-                ? "bg-indigo-500/20 border-l-2 border-indigo-500" 
+              currentSlide === 0
+                ? "bg-indigo-500/20 border-l-2 border-indigo-500"
                 : "hover:bg-slate-800/50 border-l-2 border-transparent"
             )}
           >
             <span className={cn(
               "w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0",
-              currentSlide === totalSlides - 1 ? "bg-indigo-500 text-white" : "bg-slate-700 text-slate-400"
+              currentSlide === 0 ? "bg-indigo-500 text-white" : "bg-slate-700 text-slate-400"
             )}>
               ★
             </span>
             <span className={cn(
               "text-sm font-medium",
-              currentSlide === totalSlides - 1 ? "text-white" : "text-slate-300"
+              currentSlide === 0 ? "text-white" : "text-slate-300"
             )}>
               Créditos
             </span>
@@ -176,7 +177,7 @@ export function Slideshow() {
 
       {/* Overlay for mobile nav */}
       {isNavOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 z-20 md:hidden"
           onClick={() => setIsNavOpen(false)}
         />
@@ -243,8 +244,8 @@ export function Slideshow() {
                 onClick={() => goToSlide(i)}
                 className={cn(
                   "w-2 h-2 rounded-full transition-all duration-200",
-                  i === currentSlide 
-                    ? "w-6 bg-indigo-500" 
+                  i === currentSlide
+                    ? "w-6 bg-indigo-500"
                     : "bg-slate-700 hover:bg-slate-600"
                 )}
               />
