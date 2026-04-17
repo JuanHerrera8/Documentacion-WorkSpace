@@ -244,9 +244,9 @@ export function Slide09() {
       </Table>
 
       <Callout type="info" title="Flujo del lock">
-        1. Al abrir/descargar: DELETE locks expirados → INSERT nuevo lock.<br/>
-        2. Si el INSERT falla con ORA-00001: el documento está bloqueado por otro usuario → modo solo lectura.<br/>
-        3. Al solicitar aprobación o cerrar la ventana: DELETE del lock del usuario.<br/>
+        1. Al abrir/descargar: DELETE locks expirados → INSERT nuevo lock.<br />
+        2. Si el INSERT falla con ORA-00001: el documento está bloqueado por otro usuario → modo solo lectura.<br />
+        3. Al solicitar aprobación o cerrar la ventana: DELETE del lock del usuario.<br />
         4. El lock expira automáticamente según FECHA_EXPIRACION {"<"} SYSDATE.
       </Callout>
 
@@ -255,11 +255,11 @@ export function Slide09() {
         <Card className="border-2 border-blue-500 min-w-[200px]">
           <div className="font-mono text-sm font-bold text-blue-400 mb-2">MERT_WORKSPACE</div>
           <div className="text-xs text-slate-400 leading-relaxed">
-            <strong>ID_WS</strong> (PK)<br/>
-            IDDOCUMENTO (FK)<br/>
-            TIPDOCUMENTO<br/>
-            UBICACION<br/>
-            ESTADO / PASO<br/>
+            <strong>ID_WS</strong> (PK)<br />
+            IDDOCUMENTO (FK)<br />
+            TIPDOCUMENTO<br />
+            UBICACION<br />
+            ESTADO / PASO<br />
             STATUS / IND_LISTO
           </div>
         </Card>
@@ -271,11 +271,11 @@ export function Slide09() {
         <Card className="border-2 border-emerald-500 min-w-[200px]">
           <div className="font-mono text-sm font-bold text-emerald-400 mb-2">MERT_WORKSPACE_DATOS_RAD</div>
           <div className="text-xs text-slate-400 leading-relaxed">
-            <strong>IDDOCUMENTO</strong> (PK)<br/>
-            TIP_DOCUMENTO<br/>
-            VERSION_DATOS<br/>
-            DATOS_JSON (CLOB)<br/>
-            DEFINITIVO<br/>
+            <strong>IDDOCUMENTO</strong> (PK)<br />
+            TIP_DOCUMENTO<br />
+            VERSION_DATOS<br />
+            DATOS_JSON (CLOB)<br />
+            DEFINITIVO<br />
             IDDOCUMENTO_DEF
           </div>
         </Card>
@@ -445,37 +445,37 @@ export function Slide13() {
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-        <StatCard 
+        <StatCard
           icon={<Shield className="w-5 h-5 text-blue-400" />}
           value="WorkspaceService"
           label="CRUD principal y reglas de negocio"
           iconBg="bg-blue-500/20"
         />
-        <StatCard 
+        <StatCard
           icon={<RefreshCw className="w-5 h-5 text-emerald-400" />}
           value="ConversionService"
           label="Borrador a radicado oficial"
           iconBg="bg-emerald-500/20"
         />
-        <StatCard 
+        <StatCard
           icon={<FileText className="w-5 h-5 text-amber-400" />}
           value="RadicacionService"
           label="INSERT en MERT_INTERNO/EXTERNO"
           iconBg="bg-amber-500/20"
         />
-        <StatCard 
+        <StatCard
           icon={<PenTool className="w-5 h-5 text-pink-400" />}
           value="FirmaService"
           label="PDF, firma y código de barras"
           iconBg="bg-pink-500/20"
         />
-        <StatCard 
+        <StatCard
           icon={<Lock className="w-5 h-5 text-amber-400" />}
           value="LockService"
           label="Bloqueo de edición exclusiva"
           iconBg="bg-amber-500/20"
         />
-        <StatCard 
+        <StatCard
           icon={<Key className="w-5 h-5 text-purple-400" />}
           value="PrivacidadService"
           label="Control de acceso al documento"
@@ -698,7 +698,7 @@ SELECT w.*, d.DATOS_JSON,
 
       <Callout type="info" title="Comportamiento cuando el PASO avanza">
         Cuando <Code>PASO</Code> cambia de <Code>&apos;E&apos;</Code> a <Code>&apos;A&apos;</Code>, los editores <strong>dejan de
-        ver el documento en su bandeja automáticamente</strong> — sin ninguna acción adicional. El cambio es inmediato
+          ver el documento en su bandeja automáticamente</strong> — sin ninguna acción adicional. El cambio es inmediato
         en la siguiente recarga de la bandeja.
       </Callout>
     </div>
@@ -972,9 +972,9 @@ export function SlideCredits() {
         <p className="text-xl text-indigo-400">Módulo Workspace — Mercurio SED</p>
         <p className="text-slate-500 mt-2">v2.0 | Abril 2026</p>
       </div>
-      
+
       <div className="border-t border-white/10 pt-8 w-full max-w-md">
-        <p className="text-sm text-slate-500 uppercase tracking-wider mb-4">Desarrollado por</p>
+        <p className="text-sm text-slate-500 uppercase tracking-wider mb-4">Desarrollado por: Equipo Alpha</p>
         <div className="flex flex-col gap-3">
           <div className="flex items-center justify-center gap-3">
             <Users className="w-5 h-5 text-indigo-400" />
@@ -987,6 +987,14 @@ export function SlideCredits() {
           <div className="flex items-center justify-center gap-3">
             <Users className="w-5 h-5 text-indigo-400" />
             <span className="text-lg text-white font-semibold">Santiago David</span>
+          </div>
+          <div className="flex items-center justify-center gap-3">
+            <Users className="w-5 h-5 text-indigo-400" />
+            <span className="text-lg text-white font-semibold">Juan Pablo</span>
+          </div>
+          <div className="flex items-center justify-center gap-3">
+            <Users className="w-5 h-5 text-indigo-400" />
+            <span className="text-lg text-white font-semibold">Brando Yesid</span>
           </div>
         </div>
       </div>
